@@ -54,10 +54,9 @@ client.on("message", (message) => {
 			var msgID = message.channel.lastMessageID;
 			message.channel.send(msgID);
 		} else if (command === 'echo2') {
-			message.channel.fetchMessages({around: "352292052538753025", limit: 1}).then(messages => {
-				const fetchedMsg = messages.first(); // messages is a collection!)
+			message.channel.fetchMessage("352292052538753025").then(msg => {
 				// do something with it
-				fetchedMsg.edit("This fetched message was edited");
+				msg.edit("This fetched message was edited");
 			});
 		}
 	}
