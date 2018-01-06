@@ -54,7 +54,7 @@ client.on("message", (message) => {
 			var msgID = message.channel.lastMessageID;
 			message.channel.send(msgID);
 		} else if (command === 'echo2') {
-			var msg = message.channel.fetchMessage(399136166122881034);
+			var msg = message.channel.fetchMessages({around: "399136166122881034", limit: 1}).first();
 			message.channel.send(msg.content);
 		}
 	}
