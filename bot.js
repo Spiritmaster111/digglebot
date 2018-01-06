@@ -53,13 +53,7 @@ client.on("message", (message) => {
 		} else if (command === 'echo') {
 			var msgID = message.channel.fetchPinnedMessages().then(messages => {
 				const fetchedMsg = messages.first();
-				message.channel.send(fetchedMsg.id);
-			});
-			message.channel.send(msgID);
-		} else if (command === 'echo2') {
-			message.channel.fetchMessage("352292052538753025").then(msg => {
-				// do something with it
-				msg.edit("This fetched message was edited");
+				message.channel.send(fetchedMsg.content);
 			});
 		}
 	}
