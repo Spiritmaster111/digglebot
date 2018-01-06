@@ -5,9 +5,7 @@ client.on("ready", () => {
   console.log("I am ready!");
 });
 
-var dumpChannel = client.channels.get("398995797753987085");
-//var dump = dumpChannel.fetchMessage(dumpChannel.lastMessageID);
-//let list = JSON.parse(dump);
+let list = JSON.parse(client.channels.get("398995797753987085").fetchMessage(dumpChannel.lastMessageID));
 
 const prefix = "!";
 client.on("message", (message) => {
@@ -38,7 +36,7 @@ client.on("message", (message) => {
 				list.addresses[list.len] = args[i];
 				list.len++;
 			}
-			dumpChannel.send(JSON.stringify(list));
+			client.channels.get("398995797753987085").send(JSON.stringify(list));
 		message.channel.send("Gotcha, added em to the list!")
 		} else if (command === 'use') {
 			if (!list[message.author.id]) list[message.author.id] = {used: 0};
@@ -48,11 +46,10 @@ client.on("message", (message) => {
 			}
 			message.channel.send("\"" + list.addresses[list[message.author.id].used] + "\" is all yours!");
 			list[message.author.id].used++;
-			dumpChannel.send(JSON.stringify(list));
+			client.channels.get("398995797753987085").send(JSON.stringify(list));
 		} else if (command === 'dump') {
 			//JSON.stringify(list)
 			client.channels.get("398995797753987085").send("test");
-			dumpChannel.send("test");
 		}
 	}
 });
