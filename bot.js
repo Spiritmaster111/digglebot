@@ -54,8 +54,11 @@ client.on("message", (message) => {
 			var msgID = message.channel.lastMessageID;
 			message.channel.send(msgID);
 		} else if (command === 'echo2') {
-			var msg = message.channel.fetchMessages({around: "399136166122881034", limit: 1}).first();
-			message.channel.send(msg.content);
+			message.channel.fetchMessages({around: "352292052538753025", limit: 1}).then(messages => {
+				const fetchedMsg = messages.first(); // messages is a collection!)
+				// do something with it
+				message.channel.send(fetchedMsg.content);
+			});
 		}
 	}
 });
