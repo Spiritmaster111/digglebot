@@ -55,8 +55,9 @@ client.on("message", (message) => {
 			});
 		} else if (command === 'dump') {
 			client.channels.get("398995797753987085").send(JSON.stringify(list)).then(msg => {
-				msg.pin();
+				msgToBePinned = msg;
 			});
+			msgToBePinned.pin();
 		} else if (command === 'echo') {
 			var msgID = client.channels.get("398995797753987085").fetchPinnedMessages().then(messages => {
 				const fetchedMsg = messages.first();
