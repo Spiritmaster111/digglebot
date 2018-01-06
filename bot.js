@@ -6,8 +6,9 @@ client.on("ready", () => {
 });
 
 const channelId = "398995797753987085";
-const fs = require("fs");
-let list = JSON.parse(fs.readFileSync("./list.json", "utf8"));
+var dumpChannel = client.channels.get(channelId);
+var dump = dumpChannel.fetchMessage(dumpChannel.lastMessageID);
+let list = JSON.parse(dump);
 
 const prefix = "!";
 client.on("message", (message) => {
@@ -38,9 +39,7 @@ client.on("message", (message) => {
 				list.addresses[list.len] = args[i];
 				list.len++;
 			}
-			fs.writeFile("./list.json", JSON.stringify(list), (err) => {
-				if (err) console.error(err)
-			});
+			dumpChannel.send(JSON.stringify(list));
 		message.channel.send("Gotcha, added em to the list!")
 		} else if (command === 'use') {
 			if (!list[message.author.id]) list[message.author.id] = {used: 0};
@@ -50,11 +49,9 @@ client.on("message", (message) => {
 			}
 			message.channel.send("\"" + list.addresses[list[message.author.id].used] + "\" is all yours!");
 			list[message.author.id].used++;
-			fs.writeFile("./list.json", JSON.stringify(list), (err) => {
-				if (err) console.error(err)
-			});
+			dumpChannel.send(JSON.stringify(list));
 		} else if (command === 'dump') {
-			client.channels.get(channelId).send(JSON.stringify(list));
+			dumpChannel.send(JSON.stringify(list));
 		}
 	}
 });
