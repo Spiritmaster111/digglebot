@@ -5,7 +5,7 @@ client.on("ready", () => {
 	console.log("I am ready!");
 	var msgID = client.channels.get("398995797753987085").fetchPinnedMessages().then(messages => {
 		const fetchedMsg = messages.first();
-		let list = JSON.parse(fetchedMsg);
+		list = JSON.parse(fetchedMsg);
 	});
 });
 
