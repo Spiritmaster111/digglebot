@@ -6,8 +6,8 @@ client.on("ready", () => {
 });
 
 var dumpChannel = client.channels.get("398995797753987085");
-var dump = dumpChannel.fetchMessage(dumpChannel.lastMessageID);
-let list = JSON.parse(dump);
+//var dump = dumpChannel.fetchMessage(dumpChannel.lastMessageID);
+//let list = JSON.parse(dump);
 
 const prefix = "!";
 client.on("message", (message) => {
@@ -50,6 +50,7 @@ client.on("message", (message) => {
 			list[message.author.id].used++;
 			dumpChannel.send(JSON.stringify(list));
 		} else if (command === 'dump') {
+			client.channels.get("398995797753987085").send(JSON.stringify(list));
 			dumpChannel.send(JSON.stringify(list));
 		}
 	}
