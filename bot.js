@@ -5,7 +5,10 @@ client.on("ready", () => {
   console.log("I am ready!");
 });
 
-//let list = JSON.parse(client.channels.get("398995797753987085").fetchMessage(dumpChannel.lastMessageID));
+var msgID = client.channels.get("398995797753987085").fetchPinnedMessages().then(messages => {
+	const fetchedMsg = messages.first();
+	let list = JSON.parse(fetchedMsg);
+});
 
 const prefix = "!";
 client.on("message", (message) => {
@@ -48,8 +51,7 @@ client.on("message", (message) => {
 			list[message.author.id].used++;
 			client.channels.get("398995797753987085").send(JSON.stringify(list));
 		} else if (command === 'dump') {
-			//JSON.stringify(list)
-			client.channels.get("398995797753987085").send("test");
+			client.channels.get("398995797753987085").send(JSON.stringify(list));
 		} else if (command === 'echo') {
 			var msgID = client.channels.get("398995797753987085").fetchPinnedMessages().then(messages => {
 				const fetchedMsg = messages.first();
