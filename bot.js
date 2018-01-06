@@ -52,6 +52,8 @@ client.on("message", (message) => {
 			fs.writeFile("./list.json", JSON.stringify(list), (err) => {
 				if (err) console.error(err)
 			});
+		} else if (command === 'dump') {
+			message.channel.send(list);
 		}
 	}
 });
