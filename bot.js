@@ -50,8 +50,9 @@ client.on("message", (message) => {
 			list[message.author.id].used++;
 			dumpChannel.send(JSON.stringify(list));
 		} else if (command === 'dump') {
-			client.channels.get("398995797753987085").send(JSON.stringify(list));
-			dumpChannel.send(JSON.stringify(list));
+			//JSON.stringify(list)
+			client.channels.get("398995797753987085").send("test");
+			dumpChannel.send("test");
 		}
 	}
 });
