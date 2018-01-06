@@ -3,8 +3,8 @@ const client = new Discord.Client();
 
 client.on("ready", () => {
 	console.log("I am ready!");
-	var msgID = client.channels.get("398995797753987085").fetchPinnedMessages().then(messages => {
-		const fetchedMsg = messages.first();
+	client.channels.get("398995797753987085").fetchPinnedMessages().then(messages => {
+		fetchedMsg = messages.first();
 		list = JSON.parse(fetchedMsg);
 	});
 });
@@ -54,10 +54,7 @@ client.on("message", (message) => {
 				msg.pin();
 			});
 		} else if (command === 'dump') {
-			client.channels.get("398995797753987085").send(JSON.stringify(list)).then(msg => {
-				msgToBePinned = msg;
-			});
-			msgToBePinned.pin();
+			fetchedMsg.edit("test");
 		} else if (command === 'echo') {
 			var msgID = client.channels.get("398995797753987085").fetchPinnedMessages().then(messages => {
 				const fetchedMsg = messages.first();
