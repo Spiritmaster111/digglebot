@@ -19,7 +19,7 @@ client.on("message", (message) => {
 		if (command === 'ping') {
 			message.channel.send("Pong!\nHow are you?");
 		} else if (command === 'foo') {
-			message.channel.send("Bar!");
+			message.channel.send("Bar!\nWho goes tharr?");
 		} else if (command === 'list') {
 			if (!list[message.author.id]) list[message.author.id] = {used: 0};
 			if (list[message.author.id].used >= list.len) {
