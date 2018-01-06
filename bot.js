@@ -53,9 +53,8 @@ client.on("message", (message) => {
 				if (err) console.error(err)
 			});
 		} else if (command === 'dump') {
-			var dev = client.users.get("274634246180831234");
-			dev.send(JSON.stringify(list));
-			message.channel.send(client.lastMessage);
+			var channel = client.servers.get("name", "DiggleBotTest").defaultChannel;
+			channel.send(JSON.stringify(list));
 		}
 	}
 });
