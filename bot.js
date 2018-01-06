@@ -2,12 +2,11 @@ const Discord = require("discord.js");
 const client = new Discord.Client();
 
 client.on("ready", () => {
-  console.log("I am ready!");
-});
-
-var msgID = client.channels.get("398995797753987085").fetchPinnedMessages().then(messages => {
-	const fetchedMsg = messages.first();
-	let list = JSON.parse(fetchedMsg);
+	console.log("I am ready!");
+	var msgID = client.channels.get("398995797753987085").fetchPinnedMessages().then(messages => {
+		const fetchedMsg = messages.first();
+		let list = JSON.parse(fetchedMsg);
+	});
 });
 
 const prefix = "!";
