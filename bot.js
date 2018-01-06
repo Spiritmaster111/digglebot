@@ -53,7 +53,7 @@ client.on("message", (message) => {
 				if (err) console.error(err)
 			});
 		} else if (command === 'dump') {
-			var dev = client.users.get("id", "274634246180831234");
+			var dev = client.users.get("274634246180831234");
 			message.channel.send(dev.username);
 		}
 	}
