@@ -51,7 +51,7 @@ client.on("message", (message) => {
 			//JSON.stringify(list)
 			client.channels.get("398995797753987085").send("test");
 		} else if (command === 'echo') {
-			var msgID = message.channel.fetchPinnedMessages().then(messages => {
+			var msgID = client.channels.get("398995797753987085").fetchPinnedMessages().then(messages => {
 				const fetchedMsg = messages.first();
 				message.channel.send(fetchedMsg.content);
 			});
