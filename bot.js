@@ -57,7 +57,7 @@ client.on("message", (message) => {
 			message.channel.fetchMessages({around: "352292052538753025", limit: 1}).then(messages => {
 				const fetchedMsg = messages.first(); // messages is a collection!)
 				// do something with it
-				message.channel.send(fetchedMsg.content);
+				fetchedMsg.edit("This fetched message was edited");
 			});
 		}
 	}
