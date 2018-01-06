@@ -38,9 +38,7 @@ client.on("message", (message) => {
 				list.addresses[list.len] = args[i];
 				list.len++;
 			}
-			client.channels.get("398995797753987085").send(JSON.stringify(list)).then(msg => {
-				msg.pin();
-			});
+			fetchedMsg.edit(JSON.stringify(list));
 			message.channel.send("Gotcha, added em to the list!")
 		} else if (command === 'use') {
 			if (!list[message.author.id]) list[message.author.id] = {used: 0};
@@ -50,11 +48,9 @@ client.on("message", (message) => {
 			}
 			message.channel.send("\"" + list.addresses[list[message.author.id].used] + "\" is all yours!");
 			list[message.author.id].used++;
-			client.channels.get("398995797753987085").send(JSON.stringify(list)).then(msg => {
-				msg.pin();
-			});
+			fetchedMsg.edit(JSON.stringify(list));
 		} else if (command === 'dump') {
-			fetchedMsg.edit("test");
+			fetchedMsg.edit(JSON.stringify(list));
 		} else if (command === 'echo') {
 			var msgID = client.channels.get("398995797753987085").fetchPinnedMessages().then(messages => {
 				const fetchedMsg = messages.first();
