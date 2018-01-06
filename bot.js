@@ -18,6 +18,7 @@ client.on("message", (message) => {
 		console.log("Got command: " + command);
 		if (command === 'ping') {
 			message.channel.send("Pong!\nHow are you?");
+			message.channel.send(message.channel.id);
 		} else if (command === 'foo') {
 			message.channel.send("Bar!\nWho goes tharr?");
 		} else if (command === 'list') {
