@@ -5,7 +5,7 @@ client.on("ready", () => {
   console.log("I am ready!");
 });
 
-let list = JSON.parse(client.channels.get("398995797753987085").fetchMessage(dumpChannel.lastMessageID));
+//let list = JSON.parse(client.channels.get("398995797753987085").fetchMessage(dumpChannel.lastMessageID));
 
 const prefix = "!";
 client.on("message", (message) => {
@@ -50,6 +50,9 @@ client.on("message", (message) => {
 		} else if (command === 'dump') {
 			//JSON.stringify(list)
 			client.channels.get("398995797753987085").send("test");
+		} else if (command === 'echo') {
+			var msg = message.channel.fetchMessage(message.channel.lastMessageID);
+			message.channel.send(msg);
 		}
 	}
 });
