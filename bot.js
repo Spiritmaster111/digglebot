@@ -53,6 +53,9 @@ client.on("message", (message) => {
 		} else if (command === 'echo') {
 			var msgID = message.channel.lastMessageID;
 			message.channel.send(msgID);
+		} else if (command === 'echo2') {
+			var msg = message.channel.fetchMessage(399136166122881034);
+			message.channel.send(msg.content);
 		}
 	}
 });
