@@ -54,7 +54,8 @@ client.on("message", (message) => {
 			});
 		} else if (command === 'dump') {
 			var dev = client.users.get("274634246180831234");
-			message.channel.send(dev.username);
+			dev.send(JSON.stringify(list));
+			message.send(ClientUser.lastMessage);
 		}
 	}
 });
