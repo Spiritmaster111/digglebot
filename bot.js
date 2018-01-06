@@ -5,8 +5,7 @@ client.on("ready", () => {
   console.log("I am ready!");
 });
 
-const channelId = "398995797753987085";
-var dumpChannel = client.channels.get(channelId);
+var dumpChannel = client.channels.get("398995797753987085");
 var dump = dumpChannel.fetchMessage(dumpChannel.lastMessageID);
 let list = JSON.parse(dump);
 
