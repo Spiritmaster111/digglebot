@@ -5,6 +5,7 @@ client.on("ready", () => {
   console.log("I am ready!");
 });
 
+const channelId = "398995797753987085";
 const fs = require("fs");
 let list = JSON.parse(fs.readFileSync("./list.json", "utf8"));
 
@@ -18,7 +19,6 @@ client.on("message", (message) => {
 		console.log("Got command: " + command);
 		if (command === 'ping') {
 			message.channel.send("Pong!\nHow are you?");
-			message.channel.send(message.channel.id);
 		} else if (command === 'foo') {
 			message.channel.send("Bar!\nWho goes tharr?");
 		} else if (command === 'list') {
@@ -54,8 +54,7 @@ client.on("message", (message) => {
 				if (err) console.error(err)
 			});
 		} else if (command === 'dump') {
-			var channel = client.servers.get("name", "DiggleBotTest").defaultChannel;
-			channel.send(JSON.stringify(list));
+			client.channels.get(channelId).send(JSON.stringify(list));
 		}
 	}
 });
