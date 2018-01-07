@@ -57,7 +57,7 @@ client.on("message", (message) => {
 			var subject = message.mentions.users.first();
 			if (!subject) subject = message.author;
 			var left = data.len - data[subject.id].used;
-			message.channel.send("@" + subject.id + " has " + left + " unused addresses left!");
+			message.channel.send(subject.toString() + " has " + left + " unused addresses left!");
 		} else if (command === 'add') {
 			for (var i = 0; i < args.length; i++) {
 				list.addresses[list.len] = args[i];
