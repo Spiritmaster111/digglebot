@@ -3,7 +3,7 @@ const client = new Discord.Client();
 
 client.on("ready", () => {
 	console.log("I am ready!");
-	client.channels.get("398995797753987085").fetchPinnedMessages().then(messages => {
+	/*client.channels.get("398995797753987085").fetchPinnedMessages().then(messages => {
 		var dataMsg = messages.last();
 		data = JSON.parse(dataMsg);
 		var listMsgs = messages.array();
@@ -12,7 +12,9 @@ client.on("ready", () => {
 			var toParse = listMsgs[i];
 			list[data.num-1-i] = JSON.parse(toParse);
 		} 
-	});
+	});*/
+	
+	list = client.channels.get("399616111261253632").messages.array();
 	
 	client.user.setPresence({game: {name: "dead. Pls be patient.", type: 0}});
 	client.user.setStatus("idle");
@@ -89,6 +91,10 @@ client.on("message", (message) => {
 		} else if (command === 'parrot') {
 			const msg = message.content.slice(8);
 			message.channel.send(msg);
+		} else if (command === 'test') {
+			for (var i = 0; i < list.length; i++) {
+				message.channel.send(list[i].content);
+			}
 		}
 	}
 });
