@@ -4,9 +4,10 @@ const client = new Discord.Client();
 client.on("ready", () => {
 	console.log("I am ready!");
 	client.channels.get("398995797753987085").fetchPinnedMessages().then(messages => {
-		fetchedMsg = messages.first();
-		list = JSON.parse(fetchedMsg);
+		data = JSON.parse(messages.last());
+		list = messages.array();
 	});
+	
 	client.user.setPresence({game: {name: "dead. Pls be patient.", type: 0}});
 	client.user.setStatus("idle");
 });
@@ -62,6 +63,9 @@ client.on("message", (message) => {
 				const fetchedMsg = messages.first();
 				message.channel.send(fetchedMsg.content);
 			});
+		} else if (command === 'test') {
+			var x = list[0];
+			message.channel.send(x.content);
 		}
 	}
 });
