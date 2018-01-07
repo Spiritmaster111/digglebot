@@ -17,6 +17,7 @@ client.on("ready", () => {
 	list = client.channels.get("399616111261253632").messages.array();
 	client.channels.get("399616111261253632").send("This one!");
 	console.log("List length is " + list.length);
+	client.channels.get("399616111261253632").send(list[0]);
 	
 	client.user.setPresence({game: {name: "dead. Pls be patient.", type: 0}});
 	client.user.setStatus("idle");
