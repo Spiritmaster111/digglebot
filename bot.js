@@ -4,7 +4,7 @@ const client = new Discord.Client();
 client.on("ready", () => {
 	console.log("I am ready!");
 	client.channels.get("398995797753987085").fetchPinnedMessages().then(messages => {
-		data = JSON.parse(messages.last());
+		//data = JSON.parse(messages.last());
 		list = messages.array();
 	});
 	
