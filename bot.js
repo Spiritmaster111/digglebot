@@ -56,6 +56,7 @@ client.on("message", (message) => {
 		} else if (command === 'left') {
 			var subject = message.mentions.users.first();
 			if (!subject) subject = message.author;
+			if (!data[message.author.id]) data[message.author.id] = {used: 0};
 			var left = data.len - data[subject.id].used;
 			message.channel.send(subject.toString() + " has " + left + " unused addresses left!");
 		} else if (command === 'add') {
