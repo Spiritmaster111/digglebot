@@ -4,9 +4,13 @@ const client = new Discord.Client();
 client.on("ready", () => {
 	console.log("I am ready!");
 	client.channels.get("398995797753987085").fetchPinnedMessages().then(messages => {
-		dataMsg = messages.last();
+		var dataMsg = messages.last();
 		data = JSON.parse(dataMsg);
-		list = messages.array();
+		var listMsgs = messages.array();
+		list = new Array(data.num);
+		for (var i = data.num - 1; i >= 0; i--) {
+			list[data.num-1-i] = JSON.parse(list[i]);
+		} 
 	});
 	
 	client.user.setPresence({game: {name: "dead. Pls be patient.", type: 0}});
@@ -25,18 +29,34 @@ client.on("message", (message) => {
 			message.channel.send("Pong!\nHow are you?");
 		} else if (command === 'foo') {
 			message.channel.send("Bar!\nWho goes tharr?");
-		} else if (command === 'list') {
-			if (!list[message.author.id]) list[message.author.id] = {used: 0};
-			if (list[message.author.id].used >= list.len) {
+		/*} else if (command === 'list') {
+			if (!data[message.author.id]) data[message.author.id] = {used: 0};
+			if (data[message.author.id].used >= data.len) {
 				message.channel.send("Sorry, no addresses left!");
 				return;
 			} else {
+				var stringList = "Your list contains a total of 
+				for (var i = data[message.author.id].used / 50; i < data.num; i++) {
+					var stringList = list[i].addresses[data[message.author.id].used % 50];
+					for (var i = list[i]
+					
+					
+					
+				}
+				
+			
 				var stringList = list.addresses[list[message.author.id].used];
 				for (var i = list[message.author.id].used + 1; i < list.len; i++) {
 					stringList = stringList + "\n" + list.addresses[i];
 				}
 				message.channel.send(stringList);
-			}
+				
+			}*/
+		} else if (command === 'left') {
+			var subject = message.mentions.users.first();
+			if (!subject) subject = message.author;
+			var left = data.len - data[subject.id].used;
+			message.channel.send(subject.mention() + " has " + left + " unused addresses left!");
 		} else if (command === 'add') {
 			for (var i = 0; i < args.length; i++) {
 				list.addresses[list.len] = args[i];
@@ -61,8 +81,8 @@ client.on("message", (message) => {
 				message.channel.send(fetchedMsg.content);
 			});
 		} else if (command === 'test') {
-			for (var i = data.num - 1; i >= 0; i--) {
-				message.channel.send(list[i].content);
+			for (var i = 0; i < data.num; i++) {
+				message.channel.send(JSON.stringify(list[i]));
 			}
 		}
 	}
