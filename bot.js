@@ -65,7 +65,11 @@ client.on("message", (message) => {
 				list.len++;
 			}
 			fetchedMsg.edit(JSON.stringify(list));
-			message.channel.send("Gotcha, added em to the list!")
+			if (args.length > 1) {
+				message.channel.send("Gotcha, added em to the list!");
+			} else {
+				message.channel.send("Gotcha, added it to the list!");
+			}
 		} else if (command === 'use') {
 			if (!list[message.author.id]) list[message.author.id] = {used: 0};
 			if (list[message.author.id].used >= list.len) {
@@ -82,10 +86,9 @@ client.on("message", (message) => {
 				const fetchedMsg = messages.first();
 				message.channel.send(fetchedMsg.content);
 			});
-		} else if (command === 'test') {
-			for (var i = 0; i < data.num; i++) {
-				message.channel.send(JSON.stringify(list[i]));
-			}
+		} else if (command === 'parrot') {
+			const msg = message.content.slice(8);
+			message.channel.send(msg);
 		}
 	}
 });
