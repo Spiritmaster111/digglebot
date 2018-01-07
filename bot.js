@@ -1,11 +1,12 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
 
-const prefix = "+";
-const mainChannel = client.channels.get("398995797753987085");
-const dbChannel = client.channels.get("399625358217052160");
 client.on("ready", () => {
 	console.log("I am ready!");
+	
+	mainChannel = client.channels.get("398995797753987085");
+	dbChannel = client.channels.get("399625358217052160");
+	
 	mainChannel.fetchPinnedMessages().then(messages => {
 		dataMsg = messages.last();
 		data = JSON.parse(dataMsg);
@@ -30,6 +31,7 @@ client.on("ready", () => {
 	client.user.setStatus("idle");
 });
 
+const prefix = "+";
 client.on("message", (message) => {
 	// Exit and stop if it's not there
 	if (!message.content.startsWith(prefix)) return;
