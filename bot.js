@@ -15,8 +15,11 @@ client.on("ready", () => {
 	});*/
 	
 	client.channels.get("399616111261253632").fetchMessages().then(messages => {
-		var msg = messages.last();
-		client.channels.get("399616111261253632").send(msg.content);
+		list = messages.array();
+		console.log(list.length);
+		for (var i = 0; i < list.length; i++) {
+			client.channels.get("399616111261253632").send(list[i]);
+		}
 	});
 	client.channels.get("399616111261253632").send("This one!");
 	
