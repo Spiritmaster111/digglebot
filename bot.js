@@ -39,29 +39,17 @@ client.on("message", (message) => {
 			message.channel.send("Pong!\nHow are you?");
 		} else if (command === 'foo') {
 			message.channel.send("Bar!\nWho goes tharr?");
-		/*} else if (command === 'list') {
+		} else if (command === 'list') {
 			if (!data[message.author.id]) data[message.author.id] = {used: 0};
 			if (data[message.author.id].used >= data.len) {
 				message.channel.send("Sorry, no addresses left!");
-				return;
-			} else {
-				var stringList = "Your list contains a total of 
-				for (var i = data[message.author.id].used / 50; i < data.num; i++) {
-					var stringList = list[i].addresses[data[message.author.id].used % 50];
-					for (var i = list[i]
-					
-					
-					
-				}
-				
-			
-				var stringList = list.addresses[list[message.author.id].used];
-				for (var i = list[message.author.id].used + 1; i < list.len; i++) {
-					stringList = stringList + "\n" + list.addresses[i];
+			} else { 
+				var stringList = "Your list of " + (list.length - data[message.author.id].used) + " unused addresses:";
+				for (var i = list.length-1-data[message.author.id].used; i >= 0; i--) {
+					stringList = stringList + "\n" + list[i];
 				}
 				message.channel.send(stringList);
-				
-			}*/
+			}
 		} else if (command === 'left') {
 			var subject = message.mentions.users.first();
 			if (!subject) subject = message.author;
