@@ -14,11 +14,12 @@ client.on("ready", () => {
 		} 
 	});*/
 	
-	list = client.channels.get("399616111261253632").messages.array();
+	client.channels.get("399616111261253632").fetchMessages().then(messages => {
+		var msg = messages.first();
+		client.channels.get("399616111261253632").send(msg);
+	});
 	client.channels.get("399616111261253632").send("This one!");
 	console.log("List length is " + list.length);
-	var msg = client.channels.get("399616111261253632").messages.first();
-	client.channels.get("399616111261253632").send(msg);
 	
 	client.user.setPresence({game: {name: "dead. Pls be patient.", type: 0}});
 	client.user.setStatus("idle");
