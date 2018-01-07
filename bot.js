@@ -14,14 +14,13 @@ client.on("ready", () => {
 		} 
 	});*/
 	
-	client.channels.get("399616111261253632").fetchMessages().then(messages => {
+	client.channels.get("399625358217052160").fetchMessages().then(messages => {
 		list = messages.array();
 		console.log(list.length);
 		for (var i = 0; i < list.length; i++) {
-			client.channels.get("399616111261253632").send(list[i]);
+			client.channels.get("398995797753987085").send(list[i]);
 		}
 	});
-	client.channels.get("399616111261253632").send("This one!");
 	
 	client.user.setPresence({game: {name: "dead. Pls be patient.", type: 0}});
 	client.user.setStatus("idle");
