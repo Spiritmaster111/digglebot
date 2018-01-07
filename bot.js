@@ -21,10 +21,6 @@ client.on("ready", () => {
 	
 	dbChannel.fetchMessages().then(messages => {
 		list = messages.array();
-		console.log(list.length);
-		for (var i = 0; i < list.length; i++) {
-			mainChannel.send(list[i].content);
-		}
 	});
 	
 	client.user.setPresence({game: {name: "dead. Pls be patient.", type: 0}});
@@ -67,7 +63,7 @@ client.on("message", (message) => {
 				
 			}*/
 		} else if (command === 'left') {
-			const subject = message.mentions.users.first();
+			var subject = message.mentions.users.first();
 			if (!subject) subject = message.author;
 			if (!data[subject.id]) data[subject.id] = {used: 0};
 			const left = list.length - data[subject.id].used;
@@ -75,7 +71,7 @@ client.on("message", (message) => {
 		} else if (command === 'add') {
 			for (var i = 0; i < args.length; i++) {
 				list.unshift(args[i]);
-				mainChannel.send(args[i]);
+				dbChannel.send(args[i]);
 			}
 			if (args.length > 1) {
 				message.channel.send("Gotcha, added em to the list!");
