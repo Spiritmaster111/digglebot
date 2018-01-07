@@ -4,7 +4,8 @@ const client = new Discord.Client();
 client.on("ready", () => {
 	console.log("I am ready!");
 	client.channels.get("398995797753987085").fetchPinnedMessages().then(messages => {
-		//data = JSON.parse(messages.last());
+		dataMsg = messages.last();
+		data = JSON.parse(dataMsg);
 		list = messages.array();
 	});
 	
@@ -60,7 +61,9 @@ client.on("message", (message) => {
 				message.channel.send(fetchedMsg.content);
 			});
 		} else if (command === 'test') {
-			message.channel.send(list[0].content);
+			for (var i = data.num - 1; i >= 0; i--) {
+				message.channel.send(list[i].content);
+			}
 		}
 	}
 });
