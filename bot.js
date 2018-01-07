@@ -5,7 +5,7 @@ client.on("ready", () => {
 	console.log("I am ready!");
 	
 	mainChannel = client.channels.get("398995797753987085");
-	dbChannel = client.channels.get("399625358217052160");
+	dbChannel = client.channels.get("399633585193353236");
 	
 	mainChannel.fetchPinnedMessages().then(messages => {
 		dataMsg = messages.last();
@@ -27,7 +27,7 @@ client.on("ready", () => {
 	client.user.setStatus("idle");
 });
 
-const prefix = "+";
+const prefix = "!";
 client.on("message", (message) => {
 	// Exit and stop if it's not there
 	if (!message.content.startsWith(prefix)) return;
@@ -101,6 +101,12 @@ client.on("message", (message) => {
 			for (var i = 0; i < list.length; i++) {
 				message.channel.send(list[i].content);
 			}*/
+		} else if (command === 'delistify') {
+			const delistifyMe = args[0];
+			const delistified = delistifyMe.split("\n");
+			for (var i = 0; i < delistified.length; i++) {
+				dbChannel.send(delistified[i]);
+			}
 		}
 	}
 });
