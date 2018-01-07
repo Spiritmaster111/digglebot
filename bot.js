@@ -1,24 +1,28 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
 
+const prefix = "+";
+const mainChannel = client.channels.get("398995797753987085");
+const dbChannel = client.channels.get("399625358217052160");
 client.on("ready", () => {
 	console.log("I am ready!");
-	/*client.channels.get("398995797753987085").fetchPinnedMessages().then(messages => {
-		var dataMsg = messages.last();
+	mainChannel.fetchPinnedMessages().then(messages => {
+		dataMsg = messages.last();
 		data = JSON.parse(dataMsg);
-		var listMsgs = messages.array();
+		
+		/*var listMsgs = messages.array();
 		list = new Array(data.num);
 		for (var i = data.num - 1; i >= 0; i--) {
 			var toParse = listMsgs[i];
 			list[data.num-1-i] = JSON.parse(toParse);
-		} 
-	});*/
+		}*/
+	});
 	
-	client.channels.get("399625358217052160").fetchMessages().then(messages => {
+	dbChannel.fetchMessages().then(messages => {
 		list = messages.array();
 		console.log(list.length);
 		for (var i = 0; i < list.length; i++) {
-			client.channels.get("398995797753987085").send(list[i].content);
+			mainChannel.send(list[i].content);
 		}
 	});
 	
@@ -26,7 +30,6 @@ client.on("ready", () => {
 	client.user.setStatus("idle");
 });
 
-const prefix = "+";
 client.on("message", (message) => {
 	// Exit and stop if it's not there
 	if (!message.content.startsWith(prefix)) return;
@@ -62,45 +65,44 @@ client.on("message", (message) => {
 				
 			}*/
 		} else if (command === 'left') {
-			var subject = message.mentions.users.first();
+			const subject = message.mentions.users.first();
 			if (!subject) subject = message.author;
 			if (!data[subject.id]) data[subject.id] = {used: 0};
-			var left = data.len - data[subject.id].used;
+			const left = list.length - data[subject.id].used;
 			message.channel.send(subject.toString() + " has " + left + " unused addresses left!");
 		} else if (command === 'add') {
 			for (var i = 0; i < args.length; i++) {
-				list.addresses[list.len] = args[i];
-				list.len++;
+				list.unshift(args[i]);
+				mainChannel.send(args[i]);
 			}
-			fetchedMsg.edit(JSON.stringify(list));
 			if (args.length > 1) {
 				message.channel.send("Gotcha, added em to the list!");
 			} else {
 				message.channel.send("Gotcha, added it to the list!");
 			}
 		} else if (command === 'use') {
-			if (!list[message.author.id]) list[message.author.id] = {used: 0};
-			if (list[message.author.id].used >= list.len) {
+			if (!data[message.author.id]) data[message.author.id] = {used: 0};
+			if (data[message.author.id].used >= list.length) {
 				message.channel.send("Sorry, no addresses left!");
-				return;
+			} else {
+				message.channel.send("\"" + list[list.length-data[message.author.id].used-1] + "\" is all yours!");
+				data[message.author.id].used++;
+				dataMsg.edit(JSON.stringify(data));
 			}
-			message.channel.send("\"" + list.addresses[list[message.author.id].used] + "\" is all yours!");
-			list[message.author.id].used++;
-			fetchedMsg.edit(JSON.stringify(list));
 		} else if (command === 'dump') {
-			fetchedMsg.edit(JSON.stringify(list));
-		} else if (command === 'echo') {
+			dataMsg.edit(JSON.stringify(data));
+		/*} else if (command === 'echo') {
 			var msgID = client.channels.get("398995797753987085").fetchPinnedMessages().then(messages => {
 				const fetchedMsg = messages.first();
 				message.channel.send(fetchedMsg.content);
-			});
+			});*/
 		} else if (command === 'parrot') {
 			const msg = message.content.slice(8);
 			message.channel.send(msg);
-		} else if (command === 'test') {
+		/*} else if (command === 'test') {
 			for (var i = 0; i < list.length; i++) {
 				message.channel.send(list[i].content);
-			}
+			}*/
 		}
 	}
 });
