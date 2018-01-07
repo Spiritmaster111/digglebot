@@ -17,10 +17,6 @@ client.on("message", (message) => {
 	// Exit and stop if it's not there
 	if (!message.content.startsWith(prefix)) return;
 	else {
-		if (list.len >= 65) {
-			message.channel.send("@Spirit help me I'm overloaded!");
-			client.channels.get("398995797753987085").send(message.content);
-		}
 		const args = message.content.slice(prefix.length).trim().split(/ +/g);
 		const command = args.shift().toLowerCase();
 		console.log("Got command: " + command);
@@ -64,8 +60,7 @@ client.on("message", (message) => {
 				message.channel.send(fetchedMsg.content);
 			});
 		} else if (command === 'test') {
-			var x = list[0];
-			message.channel.send(x.content);
+			message.channel.send(list[0].content);
 		}
 	}
 });
