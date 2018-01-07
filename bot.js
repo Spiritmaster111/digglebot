@@ -18,7 +18,7 @@ client.on("ready", () => {
 		list = messages.array();
 		console.log(list.length);
 		for (var i = 0; i < list.length; i++) {
-			client.channels.get("398995797753987085").send(list[i]);
+			client.channels.get("398995797753987085").send(list[i].content);
 		}
 	});
 	
