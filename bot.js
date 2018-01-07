@@ -9,7 +9,8 @@ client.on("ready", () => {
 		var listMsgs = messages.array();
 		list = new Array(data.num);
 		for (var i = data.num - 1; i >= 0; i--) {
-			list[data.num-1-i] = JSON.parse(list[i]);
+			var toParse = listMsgs[i];
+			list[data.num-1-i] = JSON.parse(toParse);
 		} 
 	});
 	
