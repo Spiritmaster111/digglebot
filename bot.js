@@ -7,9 +7,11 @@ client.on("ready", () => {
 		fetchedMsg = messages.first();
 		list = JSON.parse(fetchedMsg);
 	});
+	client.user.setPresence({game: {name: "dead. Pls be patient.", type: 0}});
+	client.user.setStatus("idle");
 });
 
-const prefix = "!";
+const prefix = "+";
 client.on("message", (message) => {
 	// Exit and stop if it's not there
 	if (!message.content.startsWith(prefix)) return;
