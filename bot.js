@@ -23,7 +23,7 @@ client.on("ready", () => {
 		list = messages.array();
 	});
 	
-	client.user.setPresence({game: {name: "Dungeons of Dankmor.", type: 0}});
+	client.user.setPresence({game: {name: "Dungeons of Dankmor", type: 0}});
 	client.user.setStatus("online");
 });
 
