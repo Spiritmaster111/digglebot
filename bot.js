@@ -40,12 +40,12 @@ client.on("message", (message) => {
 		} else if (command === 'foo') {
 			message.channel.send("Bar!\nWho goes tharr?");
 		} else if (command === 'list') {
-			if (!data[message.author.id]) data[message.author.id] = {used: 0};
-			if (data[message.author.id].used >= data.len) {
+			if (!data[message.author.id]) data[message.author.id] = 0;
+			if (data[message.author.id] >= data.len) {
 				message.channel.send("Sorry, no addresses left!");
 			} else { 
-				var stringList = "Your list of " + (list.length - data[message.author.id].used) + " unused addresses:";
-				for (var i = list.length-1-data[message.author.id].used; i >= 0; i--) {
+				var stringList = "Your list of " + (list.length - data[message.author.id]) + " unused addresses:";
+				for (var i = list.length-1-data[message.author.id]; i >= 0; i--) {
 					stringList = stringList + "\n" + list[i];
 				}
 				message.channel.send(stringList);
@@ -53,13 +53,17 @@ client.on("message", (message) => {
 		} else if (command === 'left') {
 			var subject = message.mentions.users.first();
 			if (!subject) subject = message.author;
-			if (!data[subject.id]) data[subject.id] = {used: 0};
-			const left = list.length - data[subject.id].used;
+			if (!data[subject.id]) data[subject.id] = 0;
+			const left = list.length - data[subject.id];
 			message.channel.send(subject.toString() + " has " + left + " unused addresses left!");
 		} else if (command === 'add') {
 			for (var i = 0; i < args.length; i++) {
 				list.unshift(args[i]);
 				dbChannel.send(args[i]);
+				list.pop();
+				for (var i in data) {
+					if (data[i] > 0) data[i]--;
+				}
 			}
 			if (args.length > 1) {
 				message.channel.send("Gotcha, added em to the list!");
@@ -67,12 +71,12 @@ client.on("message", (message) => {
 				message.channel.send("Gotcha, added it to the list!");
 			}
 		} else if (command === 'use') {
-			if (!data[message.author.id]) data[message.author.id] = {used: 0};
-			if (data[message.author.id].used >= list.length) {
+			if (!data[message.author.id]) data[message.author.id] = 0;
+			if (data[message.author.id] >= list.length) {
 				message.channel.send("Sorry, no addresses left!");
 			} else {
-				message.channel.send("\"" + list[list.length-data[message.author.id].used-1] + "\" is all yours!");
-				data[message.author.id].used++;
+				message.channel.send("\"" + list[list.length-data[message.author.id]-1] + "\" is all yours!");
+				data[message.author.id]++;
 				dataMsg.edit(JSON.stringify(data));
 			}
 		} else if (command === 'dump') {
