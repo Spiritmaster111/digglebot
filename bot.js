@@ -23,8 +23,8 @@ client.on("ready", () => {
 		list = messages.array();
 	});
 	
-	client.user.setPresence({game: {name: "dead. Pls be patient.", type: 0}});
-	client.user.setStatus("idle");
+	client.user.setPresence({game: {name: "Dungeons of Dankmor.", type: 0}});
+	client.user.setStatus("online");
 });
 
 const prefix = "!";
@@ -65,6 +65,7 @@ client.on("message", (message) => {
 					if (data[i] > 0) data[i]--;
 				}
 			}
+			dataMsg.edit(JSON.stringify(data));
 			if (args.length > 1) {
 				message.channel.send("Gotcha, added em to the list!");
 			} else {
