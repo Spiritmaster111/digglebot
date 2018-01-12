@@ -23,7 +23,7 @@ client.on("ready", () => {
 		list = messages.array();
 	});
 	
-	client.user.setPresence({game: {name: "Dungeons of Dankmor", type: 0}});
+	client.user.setPresence({game: {name: "without crafting", type: 0}});
 	client.user.setStatus("online");
 });
 
@@ -40,30 +40,31 @@ client.on("message", (message) => {
 		} else if (command === 'foo') {
 			message.channel.send("Bar!\nWho goes tharr?");
 		} else if (command === 'list') {
-			if (!data[message.author.id]) data[message.author.id] = 0;
-			if (data[message.author.id] >= data.len) {
+			if (!data[message.author.id]) data[message.author.id] = {"Used":0,"Score":0};
+			if (data[message.author.id].used >= data.len) {
 				message.channel.send("Sorry, no addresses left!");
 			} else { 
-				var stringList = "Your list of " + (list.length - data[message.author.id]) + " unused addresses:";
-				for (var i = list.length-1-data[message.author.id]; i >= 0; i--) {
+				var stringList = "Your list of " + (list.length - data[message.author.id].used) + " unused addresses:";
+				for (var i = list.length-1-data[message.author.id].used; i >= 0; i--) {
 					stringList = stringList + "\n" + list[i];
 				}
 				message.channel.send(stringList);
 			}
-		} else if (command === 'left') {
+		} else if (command === 'score') {
 			var subject = message.mentions.users.first();
 			if (!subject) subject = message.author;
-			if (!data[subject.id]) data[subject.id] = 0;
-			const left = list.length - data[subject.id];
-			message.channel.send(subject.toString() + " has " + left + " unused addresses left!");
+			if (!data[subject.id]) data[subject.id] = {"Used":0,"Score":0};
+			const score = data[subject.id].score;
+			message.channel.send(subject.toString() + " has added a grand total of " + score + " addresses to the list!");
 		} else if (command === 'add') {
 			for (var i = 0; i < args.length; i++) {
 				list.unshift(args[i]);
 				dbChannel.send(args[i]);
 				list.pop();
 				for (var i in data) {
-					if (data[i] > 0) data[i]--;
+					if (data[i].used > 0) data[i].used--;
 				}
+				data[message.author.id].score++;
 			}
 			dataMsg.edit(JSON.stringify(data));
 			if (args.length > 1) {
@@ -72,12 +73,12 @@ client.on("message", (message) => {
 				message.channel.send("Gotcha, added it to the list!");
 			}
 		} else if (command === 'use') {
-			if (!data[message.author.id]) data[message.author.id] = 0;
-			if (data[message.author.id] >= list.length) {
+			if (!data[message.author.id]) data[message.author.id] = {"Used":0,"Score":0};
+			if (data[message.author.id].used >= list.length) {
 				message.channel.send("Sorry, no addresses left!");
 			} else {
-				message.channel.send("\"" + list[list.length-data[message.author.id]-1] + "\" is all yours!");
-				data[message.author.id]++;
+				message.channel.send("\"" + list[list.length-data[message.author.id].used-1] + "\" is all yours!");
+				data[message.author.id].used++;
 				dataMsg.edit(JSON.stringify(data));
 			}
 		} else if (command === 'dump') {
