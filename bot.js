@@ -23,7 +23,7 @@ client.on("ready", () => {
 		list = messages.array();
 	});
 	
-	client.user.setPresence({game: {name: "without crafting", type: 0}});
+	client.user.setPresence({game: {name: "the revolution, my comrades!", type: 0}});
 	client.user.setStatus("online");
 });
 
