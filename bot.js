@@ -91,6 +91,14 @@ client.on("message", (message) => {
 		} else if (command === 'parrot') {
 			const msg = message.content.slice(8);
 			message.channel.send(msg);
+		} else if (command === 'puppet') {
+			tarChannel = client.channels.get(args[0]);
+			var msg = "";
+			for (var i = 1; i < args.length; i++) {
+				msg = msg + " " + args[i]
+			}
+			tarChannel.send(msg);
+		}
 		/*} else if (command === 'test') {
 			for (var i = 0; i < list.length; i++) {
 				message.channel.send(list[i].content);
