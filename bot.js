@@ -23,7 +23,7 @@ client.on("ready", () => {
 		list = messages.array();
 	});
 	
-	client.user.setPresence({game: {name: "the revolution, my comrades!", type: 0}});
+	client.user.setPresence({game: {name: "without consumables", type: 0}});
 	client.user.setStatus("online");
 });
 
@@ -98,7 +98,6 @@ client.on("message", (message) => {
 				msg = msg + " " + args[i]
 			}
 			tarChannel.send(msg);
-		}
 		/*} else if (command === 'test') {
 			for (var i = 0; i < list.length; i++) {
 				message.channel.send(list[i].content);
