@@ -57,6 +57,7 @@ client.on("message", (message) => {
 			var address = args[1];
 			var tarChannel = client.channels.get(channelIDs[lvl]);
 			tarChannel.send(address);
+			message.channel.send("Gotcha, added it to the list!");
 		/*} else if (command === 'list') {
 			if (args.length < 1) {
 				message.channel.send("Needs more level!");
