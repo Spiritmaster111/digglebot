@@ -87,7 +87,7 @@ client.on("message", (message) => {
 		} else if (command === 'add') {
 			for (var i = 1; i < args.length; i++) {
 				listList[args[0]].unshift(args[i]);
-				channelList[args[0].send(args[i]);
+				channelList[args[0]].send(args[i]);
 				listList[args[0]].pop();
 				for (var i in dataList[args[0]]) {
 					if (dataList[args[0]][i].used > 0) dataList[args[0]][i].used--;
