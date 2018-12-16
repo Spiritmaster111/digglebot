@@ -110,7 +110,7 @@ client.on("message", (message) => {
 				dataMsgList[parseInt(args[0])].edit(JSON.stringify(dataList[parseInt(args[0])]));
 			}
 		} else if (command === 'dump') {
-			dataMsgListparseInt(args[0])].edit(JSON.stringify(dataList[parseInt(args[0])]));
+			dataMsgList[parseInt(args[0])].edit(JSON.stringify(dataList[parseInt(args[0])]));
 		/*} else if (command === 'echo') {
 			var msgID = client.channels.get("398995797753987085").fetchPinnedMessages().then(messages => {
 				const fetchedMsg = messages.first();
