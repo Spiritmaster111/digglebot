@@ -37,7 +37,7 @@ client.on("ready", () => {
 		}*/
 	});
 	
-	list = [];
+	listList = [];
 	for (var i = 0; i < channelList.length; i++) {
 		channelList[i].fetchMessages().then(messages => {
 			listList[i] = messages.array();
