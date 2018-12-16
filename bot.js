@@ -5,6 +5,10 @@ client.on("ready", () => {
 	console.log("I am ready!");
 	
 	dbChannel = client.channels.get("523655389611556874");
+	dbChannel.fetchMessages().then(messages => {
+		dataList = messages.array();
+	});
+	
 	channelIDs = [];
 	channelIDs[0] = "523653674350804992";
 	channelIDs[1] = "523653688343003136";
@@ -22,7 +26,7 @@ client.on("ready", () => {
 	channelIDs[13] = "523653835974115349";
 	channelIDs[14] = "523653852927361061";
 	
-	client.user.setPresence({game: {name: "broken :(", type: 0}});
+	client.user.setPresence({game: {name: "semi-functional :|", type: 0}});
 	client.user.setStatus("online");
 });
 
@@ -49,10 +53,21 @@ client.on("message", (message) => {
 			}
 			tarChannel.send(msg);
 		} else if (command === 'add') {
-			var lvl = parseInt(args[0]);
+			var lvl = parseInt(args[0]) - 1;
 			var address = args[1];
 			var tarChannel = client.channels.get(channelIDs[lvl]);
 			tarChannel.send(address);
+		/*} else if (command === 'list') {
+			if (args.length < 1) {
+				message.channel.send("Needs more level!");
+			} else {
+				var lvl = parseInt(args[0]) - 1;
+				var data = JSON.parse(dataList[lvl]);
+				var tarChannel = client.channels.get(channelIDs[lvl]);
+				if (!data[message.author.id]) data[message.author.id] = {"Used":0,"Score":0};
+				var used = data[message.author.id].used;
+				
+			}*/
 		}
 	}
 });
