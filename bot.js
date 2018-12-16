@@ -85,9 +85,9 @@ client.on("message", (message) => {
 			const score = data[subject.id].score;
 			message.channel.send(subject.toString() + " has added a grand total of " + score + " addresses to the list!");*/
 		} else if (command === 'add') {
-			for (var i = 0; i < args.length; i++) {
+			for (var i = 1; i < args.length; i++) {
 				listList[args[0]].unshift(args[i]);
-				dbChannel.send(args[i]);
+				channelList[args[0].send(args[i]);
 				listList[args[0]].pop();
 				for (var i in dataList[args[0]]) {
 					if (dataList[args[0]][i].used > 0) dataList[args[0]][i].used--;
@@ -95,7 +95,7 @@ client.on("message", (message) => {
 				//dataList[args[0]][message.author.id].score++;
 			}
 			dataMsgList[args[0]].edit(JSON.stringify(dataList[args[0]]));
-			if (args.length > 1) {
+			if (args.length > 2) {
 				message.channel.send("Gotcha, added em to the list!");
 			} else {
 				message.channel.send("Gotcha, added it to the list!");
