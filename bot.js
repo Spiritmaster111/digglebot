@@ -62,7 +62,8 @@ client.on("message", (message) => {
 			var msgAdd = "`!add level address`: Stores the given address in the database of addresses originating from given floor."
 			var msgUnadd = "`!unadd level`: Removes the most recently added address from given levels database. Used to erase oopsies and typos."
 			var msgUse = "`!use level`: Gives you an unused address from given level so you can go to the Wizardlands and probably die."
-			message.author.send(msgHelp + "\n" + msgPing + "\n" + msgFoo + "\n" + msgParrot + "\n" + msgAdd + "\n" + msgUnadd + "\n" + msgUse);
+			var msgUnuse = "`!unuse level`: Reverts all consequences of commiting to a dangerous venture. Just in the database tho, your character's dead won't be reverted."
+			message.author.send(msgHelp + "\n" + msgPing + "\n" + msgFoo + "\n" + msgParrot + "\n" + msgAdd + "\n" + msgUnadd + "\n" + msgUse + "\n" + msgUnuse);
 		} else if (command === 'add') {
 			var lvl = parseInt(args[0]) - 1;
 			var dataMsg = dataList[lvl];
@@ -83,6 +84,7 @@ client.on("message", (message) => {
 			tarChannel.fetchMessages().then(messages => {
 				var tarMsg = messages.first();
 				logChannel.send("Deleted address " + tarMsg.toString() + " from level " + args[0]);
+				message.channel.send("Deleted \"" + tarMsg.toString() + "\" from level " + args[0] + ". Get it right next time :angry:";
 				tarMsg.delete();
 			});
 		} else if (command === 'use') {
@@ -105,6 +107,13 @@ client.on("message", (message) => {
 				data[message.author.id].used++;
 			}
 			dataMsg.edit(JSON.stringify(data));
+		} else if (command === 'unuse') {
+			var lvl = parseInt(args[0]) - 1;
+			var dataMsg = dataList[lvl];
+			var data = JSON.parse(dataMsg);
+			if (data[message.author.id].used > 0) data[message.author.id].used--;
+			dataMsg.edit(JSON.stringify(data));
+			message.channel.send("Time has been rewound. Your address usage in level " + args[0] + " is no more.");
 		/*} else if (command === 'list') {
 			if (args.length < 1) {
 				message.channel.send("Needs more level!");
