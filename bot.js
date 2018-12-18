@@ -27,7 +27,7 @@ client.on("ready", () => {
 	channelIDs[13] = "523653835974115349";
 	channelIDs[14] = "523653852927361061";
 	
-	client.user.setPresence({game: {name: "semi-functional :|", type: 0}});
+	client.user.setPresence({game: {name: "pretty much alive :) | !help", type: 0}});
 	client.user.setStatus("online");
 });
 
@@ -84,7 +84,7 @@ client.on("message", (message) => {
 			tarChannel.fetchMessages().then(messages => {
 				var tarMsg = messages.first();
 				logChannel.send("Deleted address " + tarMsg.toString() + " from level " + args[0]);
-				message.channel.send("Deleted \"" + tarMsg.toString() + "\" from level " + args[0] + ". Get it right next time :angry:";
+				message.channel.send("Deleted \"" + tarMsg.toString() + "\" from level " + args[0] + ". Get it right next time :angry:");
 				tarMsg.delete();
 			});
 		} else if (command === 'use') {
