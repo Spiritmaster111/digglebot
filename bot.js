@@ -83,7 +83,7 @@ client.on("message", (message) => {
 				tarChannel.fetchMessages().then(messages => {
 					var list = messages.array();
 					var address = list[Math.max(50, data.len) - data[message.author.id].used - 1];
-					message.channel.send("\"" + address + "\" is all yours!");
+					message.channel.send("\"" + address.content + "\" is all yours!");
 				});
 				data[message.author.id].used++;
 			}
