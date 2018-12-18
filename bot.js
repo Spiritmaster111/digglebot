@@ -73,10 +73,10 @@ client.on("message", (message) => {
 			var dataMsg = dataList[lvl];
 			var data = JSON.parse(dataMsg);
 			if (!data[message.author.id]) data[message.author.id] = {"used":0,"lastLen":0};
-			var usedMod = max(50, data.len) - max(50, data[message.author.id].lastLen);
+			var usedMod = Math.max(50, data.len) - Math.max(50, data[message.author.id].lastLen);
 			data[message.author.id].lastLen = data.len;
 			data[message.author.id].used -= usedMod;
-			if (data[message.author.id].used >= max(50, data.len)) {
+			if (data[message.author.id].used >= Math.max(50, data.len)) {
 				message.channel.send("Sorry, no unused addresses left!");
 			} else {
 				var tarChannel = client.channels.get(channelIDs[lvl]);
