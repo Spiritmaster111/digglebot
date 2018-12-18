@@ -54,6 +54,8 @@ client.on("message", (message) => {
 				msg = msg + " " + args[i]
 			}
 			tarChannel.send(msg);
+		} else if (command === 'help') {
+			message.author.send("\!help\n\!add level address\n\!unadd level\n\!use level");
 		} else if (command === 'add') {
 			var lvl = parseInt(args[0]) - 1;
 			var dataMsg = dataList[lvl];
