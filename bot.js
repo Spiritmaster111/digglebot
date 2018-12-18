@@ -56,12 +56,20 @@ client.on("message", (message) => {
 			tarChannel.send(msg);
 		} else if (command === 'add') {
 			var lvl = parseInt(args[0]) - 1;
+			var dataMsg = dataList[lvl];
+			var data = JSON.parse(dataMsg);
+			data.len++;
+			dataMsg.edit(JSON.stringify(data));
 			var address = args[1];
 			var tarChannel = client.channels.get(channelIDs[lvl]);
 			tarChannel.send(address);
 			message.channel.send("Gotcha, added it to the list!");
 		} else if (command === 'unadd') {
 			var lvl = parseInt(args[0]) - 1;
+			var dataMsg = dataList[lvl];
+			var data = JSON.parse(dataMsg);
+			data.len--;
+			dataMsg.edit(JSON.stringify(data));
 			var tarChannel = client.channels.get(channelIDs[lvl]);
 			tarChannel.fetchMessages().then(messages => {
 				var tarMsg = messages.first();
