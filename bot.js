@@ -39,7 +39,7 @@ client.on("message", (message) => {
 		const args = message.content.slice(prefix.length).trim().split(/ +/g);
 		const command = args.shift().toLowerCase();
 		console.log("Got command: " + command);
-		logChannel.send(message.content.slice(1));
+		logChannel.send(message.author.toString() + ": " + message.content.slice(1));
 		if (command === 'ping') {
 			message.channel.send("Pong!\nHow are you?");
 		} else if (command === 'foo') {
@@ -60,6 +60,14 @@ client.on("message", (message) => {
 			var tarChannel = client.channels.get(channelIDs[lvl]);
 			tarChannel.send(address);
 			message.channel.send("Gotcha, added it to the list!");
+		} else if (command === 'unadd') {
+			var lvl = parseInt(args[0]) - 1;
+			var tarChannel = client.channels.get(channelIDs[lvl]);
+			tarChannel.fetchPinnedMessages().then(messages => {
+				tarMsg = messages.last();
+				logChannel.send("Deleted address ${tarMsg} from level " + (args[0]-1));
+				tarMsg.delete();
+			});
 		/*} else if (command === 'list') {
 			if (args.length < 1) {
 				message.channel.send("Needs more level!");
