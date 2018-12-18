@@ -64,7 +64,7 @@ client.on("message", (message) => {
 			var lvl = parseInt(args[0]) - 1;
 			var tarChannel = client.channels.get(channelIDs[lvl]);
 			tarChannel.fetchMessages().then(messages => {
-				var tarMsg = messages.last();
+				var tarMsg = messages.first();
 				logChannel.send("Deleted address " + tarMsg.toString() + " from level " + args[0]);
 				tarMsg.delete();
 			});
