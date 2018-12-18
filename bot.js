@@ -68,6 +68,27 @@ client.on("message", (message) => {
 				logChannel.send("Deleted address " + tarMsg.toString() + " from level " + args[0]);
 				tarMsg.delete();
 			});
+		} else if (command === 'use') {
+			var lvl = parseInt(args[0]) - 1;
+			var dataMsg = dataList[lvl];
+			var data = JSON.parse(dataMsg);
+			if (!data[message.author.id]) data[message.author.id] = {"Used":0,"LastLen":0};
+			var usedMod = max(50, data.len) - max(50, data[message.author.id].lastLen);
+			data[message.author.id].lastLen = data.len;
+			data[message.author.id].used -= usedMod;
+			if (data[message.author.id].used >= max(50, data.len)) {
+				message.channel.send("Sorry, no unused addresses left!");
+			} else {
+				var tarChannel = client.channels.get(channelIDs[lvl]);
+				var list;
+				tarChannel.fetchMessages().then(messages => {
+					list = messages.array();
+				});
+				var address = list[list.len - data[message.author.id].used - 1];
+				message.channel.send("\"" + address + "\" is all yours!");
+				data[message.author.id].used++;
+			}
+			dataMsg.edit(JSON.stringify(data));
 		/*} else if (command === 'list') {
 			if (args.length < 1) {
 				message.channel.send("Needs more level!");
