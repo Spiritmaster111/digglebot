@@ -55,7 +55,14 @@ client.on("message", (message) => {
 			}
 			tarChannel.send(msg);
 		} else if (command === 'help') {
-			message.author.send("\!help\n\!add level address\n\!unadd level\n\!use level");
+			var msgHelp = "`!help`: Slides into your DMs with all available commands, as you may or may not have figured out by now."
+			var msgPing = "`!ping`: Pong?"
+			var msgFoo = "`!foo`: Fee Fie Foe Foo."
+			var msgParrot = "`!parrot message`: Repeats whatever it is you just said. CAW CAW!"
+			var msgAdd = "`!add level address`: Stores the given address in the database of addresses originating from given floor.
+			var msgUnadd = "`!unadd level`: Removes the most recently added address from given levels database. Used to erase oopsies and typos."
+			var msgUse = "`!use level`: Gives you an unused address from given level so you can go to the Wizardlands and probably die."
+			message.author.send(msgHelp + "\n" + msgPing + "\n" + msgFoo + "\n" + msgParrot + "\n" + msgAdd + "\n" + msgUnadd + "\n" + msgUse);
 		} else if (command === 'add') {
 			var lvl = parseInt(args[0]) - 1;
 			var dataMsg = dataList[lvl];
