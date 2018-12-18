@@ -63,9 +63,9 @@ client.on("message", (message) => {
 		} else if (command === 'unadd') {
 			var lvl = parseInt(args[0]) - 1;
 			var tarChannel = client.channels.get(channelIDs[lvl]);
-			tarChannel.fetchPinnedMessages().then(messages => {
-				tarMsg = messages.last();
-				logChannel.send("Deleted address ${tarMsg} from level " + (args[0]-1));
+			tarChannel.fetchMessages().then(messages => {
+				var tarMsg = messages.last();
+				logChannel.send("Deleted address " + tarMsg.toString() + " from level " + args[0]);
 				tarMsg.delete();
 			});
 		/*} else if (command === 'list') {
