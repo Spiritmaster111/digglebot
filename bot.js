@@ -80,12 +80,11 @@ client.on("message", (message) => {
 				message.channel.send("Sorry, no unused addresses left!");
 			} else {
 				var tarChannel = client.channels.get(channelIDs[lvl]);
-				var list;
 				tarChannel.fetchMessages().then(messages => {
-					list = messages.array();
+					var list = messages.array();
+					var address = list[Math.max(50, data.len) - data[message.author.id].used - 1];
+					message.channel.send("\"" + address + "\" is all yours!");
 				});
-				var address = list[Math.max(50, data.len) - data[message.author.id].used - 1];
-				message.channel.send("\"" + address + "\" is all yours!");
 				data[message.author.id].used++;
 			}
 			dataMsg.edit(JSON.stringify(data));
