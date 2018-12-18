@@ -76,13 +76,13 @@ client.on("message", (message) => {
 			var usedMod = Math.max(50, data.len) - Math.max(50, data[message.author.id].lastLen);
 			data[message.author.id].lastLen = data.len;
 			data[message.author.id].used -= usedMod;
-			if (data[message.author.id].used >= Math.max(50, data.len)) {
+			if (data[message.author.id].used >= Math.min(50, data.len)) {
 				message.channel.send("Sorry, no unused addresses left!");
 			} else {
 				var tarChannel = client.channels.get(channelIDs[lvl]);
 				tarChannel.fetchMessages().then(messages => {
 					var list = messages.array();
-					var address = list[Math.max(50, data.len) - data[message.author.id].used - 1];
+					var address = list[Math.min(50, data.len) - data[message.author.id].used - 1];
 					message.channel.send("\"" + address.content + "\" is all yours!");
 				});
 				data[message.author.id].used++;
