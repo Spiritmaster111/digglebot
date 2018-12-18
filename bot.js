@@ -39,7 +39,7 @@ client.on("message", (message) => {
 		const args = message.content.slice(prefix.length).trim().split(/ +/g);
 		const command = args.shift().toLowerCase();
 		console.log("Got command: " + command);
-		logChannel.send(message.author.toString() + ": " + message.content.slice(1));
+		logChannel.send(message.author.username + ": " + message.content.slice(1));
 		if (command === 'ping') {
 			message.channel.send("Pong!\nHow are you?");
 		} else if (command === 'foo') {
@@ -82,7 +82,7 @@ client.on("message", (message) => {
 				var tarChannel = client.channels.get(channelIDs[lvl]);
 				tarChannel.fetchMessages().then(messages => {
 					var list = messages.array();
-					var address = list[Math.min(50, data.len) - data[message.author.id].used - 1];
+					var address = list[Math.min(50, data.len) - data[message.author.id].used];
 					message.channel.send("\"" + address.content + "\" is all yours!");
 				});
 				data[message.author.id].used++;
