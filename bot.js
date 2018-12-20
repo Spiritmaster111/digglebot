@@ -114,17 +114,23 @@ client.on("message", (message) => {
 			if (data[message.author.id].used > 0) data[message.author.id].used--;
 			dataMsg.edit(JSON.stringify(data));
 			message.channel.send("Time has been rewound. Your address usage in level " + args[0] + " is no more.");
-		/*} else if (command === 'list') {
+		} else if (command === 'list') {
 			if (args.length < 1) {
 				message.channel.send("Needs more level!");
 			} else {
 				var lvl = parseInt(args[0]) - 1;
-				var data = JSON.parse(dataList[lvl]);
-				var tarChannel = client.channels.get(channelIDs[lvl]);
-				if (!data[message.author.id]) data[message.author.id] = {"Used":0,"Score":0};
-				var used = data[message.author.id].used;
-				
-			}*/
+				var dataMsg = dataList[lvl];
+				var data = JSON.parse(dataMsg);
+				if (!data[message.author.id]) data[message.author.id] = {"used":0,"lastLen":0};
+				var usedMod = Math.max(50, data.len) - Math.max(50, data[message.author.id].lastLen);
+				data[message.author.id].lastLen = data.len;
+				data[message.author.id].used -= usedMod;
+				var msg = "Your list of " + Math.min(50, data.len) - data[message.author.id].used + " unused level " + lvl+1 + " addresses:";
+				for (var i = Math.min(50, data.len) - data[message.author.id].used; i > 0; i--) {
+					msg += "\n" + list[i].content;
+				}
+				message.channel.send(msg);
+			}
 		}
 	}
 });
