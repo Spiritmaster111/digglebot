@@ -125,10 +125,14 @@ client.on("message", (message) => {
 				var usedMod = Math.max(50, data.len) - Math.max(50, data[message.author.id].lastLen);
 				data[message.author.id].lastLen = data.len;
 				data[message.author.id].used -= usedMod;
-				var msg = "Your list of " + Math.min(50, data.len) - data[message.author.id].used + " unused level " + lvl+1 + " addresses:";
-				for (var i = Math.min(50, data.len) - data[message.author.id].used; i > 0; i--) {
-					msg += "\n" + list[i].content;
-				}
+				var tarChannel = client.channels.get(channelIDs[lvl]);
+				tarChannel.fetchMessages().then(messages => {
+					var list = messages.array();
+					var msg = "Your list of " + Math.min(50, data.len) - data[message.author.id].used + " unused level " + lvl+1 + " addresses:";
+					for (var i = Math.min(50, data.len) - data[message.author.id].used; i > 0; i--) {
+						msg += "\n" + list[i].content;
+					}
+				});
 				message.channel.send(msg);
 			}
 		}
