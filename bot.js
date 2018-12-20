@@ -114,7 +114,7 @@ client.on("message", (message) => {
 			if (data[message.author.id].used > 0) data[message.author.id].used--;
 			dataMsg.edit(JSON.stringify(data));
 			message.channel.send("Time has been rewound. Your address usage in level " + args[0] + " is no more.");
-		} else if (command === 'list') {
+		/*} else if (command === 'list') {
 			if (args.length < 1) {
 				message.channel.send("Needs more level!");
 			} else {
@@ -134,7 +134,7 @@ client.on("message", (message) => {
 					}
 				});
 				message.channel.send(msg);
-			}
+			}*/
 		}
 	}
 });
