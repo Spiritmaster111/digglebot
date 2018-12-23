@@ -65,6 +65,10 @@ client.on("message", (message) => {
 			var msgUnuse = "`!unuse level`: Reverts all consequences of commiting to a dangerous venture. Just in the database tho, your character's dead won't be reverted."
 			message.author.send(msgHelp + "\n" + msgPing + "\n" + msgFoo + "\n" + msgParrot + "\n" + msgAdd + "\n" + msgUnadd + "\n" + msgUse + "\n" + msgUnuse);
 		} else if (command === 'add') {
+			if (args.length < 2) {
+				message.channel.send("Needs more level!");
+				return;
+			}
 			var lvl = parseInt(args[0]) - 1;
 			var dataMsg = dataList[lvl];
 			var data = JSON.parse(dataMsg);
@@ -75,6 +79,10 @@ client.on("message", (message) => {
 			tarChannel.send(address);
 			message.channel.send("Gotcha, added it to the list!");
 		} else if (command === 'unadd') {
+			if (args.length < 1) {
+				message.channel.send("Needs more level!");
+				return;
+			}
 			var lvl = parseInt(args[0]) - 1;
 			var dataMsg = dataList[lvl];
 			var data = JSON.parse(dataMsg);
@@ -88,6 +96,10 @@ client.on("message", (message) => {
 				tarMsg.delete();
 			});
 		} else if (command === 'use') {
+			if (args.length < 1) {
+				message.channel.send("Needs more level!");
+				return;
+			}
 			var lvl = parseInt(args[0]) - 1;
 			var dataMsg = dataList[lvl];
 			var data = JSON.parse(dataMsg);
@@ -108,6 +120,10 @@ client.on("message", (message) => {
 			}
 			dataMsg.edit(JSON.stringify(data));
 		} else if (command === 'unuse') {
+			if (args.length < 1) {
+				message.channel.send("Needs more level!");
+				return;
+			}
 			var lvl = parseInt(args[0]) - 1;
 			var dataMsg = dataList[lvl];
 			var data = JSON.parse(dataMsg);
