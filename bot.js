@@ -54,7 +54,7 @@ client.on("message", (message) => {
 		let logEntry = message.guild +" | "+ message.channel +" | "+ message.author.tag +" | "+ message.createdAt +" | "+ message.content;
 		let attachArray = message.attachments.array();
 		attachArray.forEach(function(item, index, array) {
-			logEntry += item;
+			logEntry += item.url;
 		});
 		archivesChannel.send(logEntry);
 	}
