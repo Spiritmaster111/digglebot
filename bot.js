@@ -36,7 +36,7 @@ client.on("ready", () => {
 const prefix = "!";
 client.on("message", (message) => {
 	if (message.guild.id != "398995797753987083") {
-		archivesChannel.send(message.guild+" | "+${message.channel}+" | "+${message.author}+" | "+${message.date}+" | "+${message.content}");
+		archivesChannel.send(message.guild +" | "+ message.channel +" | "+ message.author +" | "+ message.date +" | "+ message.content);
 	}
 	// Exit and stop if it's not there
 	if (!message.content.startsWith(prefix)) return;
