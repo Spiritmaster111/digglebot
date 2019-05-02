@@ -37,14 +37,30 @@ client.on("ready", () => {
 client.on("messageUpdate", (oldMessage, newMessage) => {
 	if (oldMessage.guild.id != "398995797753987083") {
 		let editedAt = new Date();
-		editsChanel.send(oldMessage.guild +" | "+ oldMessage.channel +" | "+ oldMessage.author.tag +" | "+ oldMessage.createdAt +" | "+ editedAt +" | "+ oldMessage.content +" >>> "+ newMessage.content);
+		let logEntry = oldMessage.guild +" | "+ oldMessage.channel +" | "+ oldMessage.author.tag +" | "+ oldMessage.createdAt +" | "+ editedAt +" | "+ oldMessage.content;
+		let oldAttachArray = oldMessage.attachments.array();
+		oldAttachArray.forEach(function(item, index, array) {
+			logEntry += item.url;
+		});
+		logEntry += " >>> "+ newMessage.content;
+		let newAttachArray = oldMessage.attachments.array();
+		newAttachArray.forEach(function(item, index, array) {
+			logEntry += item.url;
+		});
+		archivesChannel.send(logEntry);
 	}
 });
 
 client.on("messageDelete", (message) => {
 	if (message.guild.id != "398995797753987083") {
 		let deletedAt = new Date();
-		editsChanel.send(message.guild +" | "+ message.channel +" | "+ message.author.tag +" | "+ message.createdAt + " | "+ deletedAt +" | "+ message.content +" >>> DELETED");
+		let logEntry = message.guild +" | "+ message.channel +" | "+ message.author.tag +" | "+ message.createdAt + " | "+ deletedAt +" | "+ message.content;
+		let attachArray = message.attachments.array();
+		attachArray.forEach(function(item, index, array) {
+			logEntry += item.url;
+		});
+		logEntry += " >>> DELETED";
+		editsChanel.send(logEntry);
 	}
 });
 
