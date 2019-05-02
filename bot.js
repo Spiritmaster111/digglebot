@@ -34,8 +34,8 @@ client.on("ready", () => {
 	client.user.setStatus("online");
 });
 
-client.on("voiceStatusUpdate", (oldMember, newMember) => {
-	console.log("voiceStatusUpdate received");
+client.on("voiceStateUpdate", (oldMember, newMember) => {
+	console.log("voiceStateUpdate received");
 	let updatedAt = new Date();
 	if (oldMember.voiceChannelID != newMember.voiceChannelID) {
 		presenceChannel.send(oldMember.guild +" | "+ oldMember.user.tag +" | "+ updatedAt +" | "+ oldMember.voiceChannel.name +" >>> "+ newMember.voiceChannel.name);
