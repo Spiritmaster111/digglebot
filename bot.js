@@ -51,7 +51,12 @@ client.on("messageDelete", (message) => {
 const prefix = "!";
 client.on("message", (message) => {
 	if (message.guild.id != "398995797753987083") {
-		archivesChannel.send(message.guild +" | "+ message.channel +" | "+ message.author.tag +" | "+ message.createdAt +" | "+ message.content + message.attachments);
+		let logEntry = message.guild +" | "+ message.channel +" | "+ message.author.tag +" | "+ message.createdAt +" | "+ message.content;
+		let attachArray = message.attachments.array();
+		attachArray.forEach(function(item, index, array) {
+			logEntry += item;
+		});
+		archivesChannel.send(logEntry);
 	}
 	// Exit and stop if it's not there
 	if (!message.content.startsWith(prefix)) return;
