@@ -34,6 +34,25 @@ client.on("ready", () => {
 	client.user.setStatus("online");
 });
 
+client.on("voiceStatusUpdate", (oldMember, newMember) => {
+	let updatedAt = new Date();
+	if (oldMember.voiceChannelID != newMember.voiceChannelID) {
+		presenceChannel.send(oldMember.guild +" | "+ oldMember.user.tag +" | "+ updatedAt +" | "+ oldMember.voiceChannel.name +" >>> "+ newMember.voiceChannel.name);
+	}
+	if (oldMember.selfMute != newMember.selfMute) {
+		presenceChannel.send(oldMember.guild +" | "+ oldMember.user.tag +" | "+ updatedAt +" | "+ (newMember.selfMute ? "SELF MUTED" : "SELF UNMUTED"));
+	}
+	if (oldMember.selfDeaf != newMember.selfDeaf) {
+		presenceChannel.send(oldMember.guild +" | "+ oldMember.user.tag +" | "+ updatedAt +" | "+ (newMember.selfDeaf ? "SELF DEAFENED" : "SELF UNDEAFENED"));
+	}
+	if (oldMember.serverMute != newMember.serverMute) {
+		presenceChannel.send(oldMember.guild +" | "+ oldMember.user.tag +" | "+ updatedAt +" | "+ (newMember.serverMute ? "SERVER MUTED" : "SERVER UNMUTED"));
+	}
+	if (oldMember.serverDeaf != newMember.serverDeaf) {
+		presenceChannel.send(oldMember.guild +" | "+ oldMember.user.tag +" | "+ updatedAt +" | "+ (newMember.serverDeaf ? "SERVER DEAFENED" : "SERVER UNDEAFENED"));
+	}
+});
+
 client.on("presenceUpdate", (oldMember, newMember) => {
 	let updatedAt = new Date();
 	if (oldMember.presence.game != newMember.presence.game) {
