@@ -36,7 +36,7 @@ client.on("ready", () => {
 
 client.on("messageUpdate", (oldMessage, newMessage) => {
 	console.log("messageUpdate event received");
-	if (message.guild.id != "398995797753987083") {
+	if (oldMessage.guild.id != "398995797753987083") {
 		editsChanel.send(oldMessage.guild +" | "+ oldMessage.channel +" | "+ oldMessage.author.tag +" | "+ oldMessage.createdAt +" | "+ oldMessage.editedAt +" | "+ oldMessage.content +" >>> "+ newMessage.content);
 	}
 });
