@@ -7,6 +7,7 @@ client.on("ready", () => {
 	dbChannel = client.channels.get("523655389611556874");
 	logChannel = client.channels.get("524499350647341086");
 	archivesChannel = client.channels.get("573509532756738065");
+	editsChanel = client.channels.get("573515097230540810");
 	presenceChannel = client.channels.get("573509727313461254");
 	dbChannel.fetchMessages().then(messages => {
 		dataList = messages.array();
@@ -32,6 +33,12 @@ client.on("ready", () => {
 	client.user.setPresence({game: {name: "pretty much alive :) | !help", type: 0}});
 	client.user.setStatus("online");
 });
+
+client.on("messageUpdate", (oldMessage, newMessage) {
+	if (message.guild.id != "398995797753987083") {
+		editsChanel.send(oldMessage.guild +" | "+ oldMessage.channel +" | "+ oldMessage.author.tag +" | "+ oldMessage.createdAt +" | "+ oldMessage.editedAt +" | "+ oldMessage.content +" >>> "+ newMessage.content);
+	}
+}
 
 const prefix = "!";
 client.on("message", (message) => {
