@@ -38,7 +38,7 @@ client.on("voiceStateUpdate", (oldMember, newMember) => {
 	console.log("voiceStateUpdate received");
 	let updatedAt = new Date();
 	if (oldMember.voiceChannelID != newMember.voiceChannelID) {
-		presenceChannel.send(oldMember.guild +" | "+ oldMember.user.tag +" | "+ updatedAt +" | "+ oldMember.voiceChannel.name +" >>> "+ newMember.voiceChannel.name);
+		presenceChannel.send(oldMember.guild +" | "+ oldMember.user.tag +" | "+ updatedAt +" | "+ (oldMember.voiceChannel ? oldMember.voiceChannel.name : "NONE") +" >>> "+ (newMember.voiceChannel ? newMember.voiceChannel.name : "NONE"));
 	}
 	if (oldMember.selfMute != newMember.selfMute) {
 		presenceChannel.send(oldMember.guild +" | "+ oldMember.user.tag +" | "+ updatedAt +" | "+ (newMember.selfMute ? "SELF MUTED" : "SELF UNMUTED"));
