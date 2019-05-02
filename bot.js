@@ -90,7 +90,7 @@ client.on("messageDelete", (message) => {
 			logEntry += item.url;
 		});
 		logEntry += " >>> DELETED";
-		editsChanel.send(logEntry);
+		editsChannel.send(logEntry);
 	}
 });
 
