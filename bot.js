@@ -37,10 +37,10 @@ client.on("ready", () => {
 client.on("presenceUpdate", (oldMember, newMember) => {
 	let updatedAt = new Date();
 	if (oldMember.presence.game != newMember.presence.game) {
-		presenceChannel.send(oldMember.user.tag +" | "+ updatedAt +" | "+ oldMember.presence.game +" >>> "+ newMember.presence.game;
+		presenceChannel.send(oldMember.user.tag +" | "+ updatedAt +" | "+ oldMember.presence.game +" >>> "+ newMember.presence.game);
 	}
 	if (oldMember.presence.status != newMember.presence.status) {
-		presenceChannel.send(oldMember.user.tag +" | "+ updatedAt +" | "+ oldMember.presence.status +" >>> "+ newMember.presence.status;
+		presenceChannel.send(oldMember.user.tag +" | "+ updatedAt +" | "+ oldMember.presence.status +" >>> "+ newMember.presence.status);
 	}
 });
 
