@@ -35,9 +35,15 @@ client.on("ready", () => {
 });
 
 client.on("messageUpdate", (oldMessage, newMessage) => {
-	console.log("messageUpdate event received");
 	if (oldMessage.guild.id != "398995797753987083") {
-		editsChanel.send(oldMessage.guild +" | "+ oldMessage.channel +" | "+ oldMessage.author.tag +" | "+ oldMessage.createdAt +" | "+ oldMessage.editedAt +" | "+ oldMessage.content +" >>> "+ newMessage.content);
+		editsChanel.send(oldMessage.guild +" | "+ oldMessage.channel +" | "+ oldMessage.author.tag +" | "+ oldMessage.createdAt +" | "+ newMessage.editedAt +" | "+ oldMessage.content +" >>> "+ newMessage.content);
+	}
+});
+
+client.on("messageDelete", (message) => {
+	if (message.guild.id != "398995797753987083") {
+		let deletedAt = new Date();
+		editsChanel.send(message.guild +" | "+ message.channel +" | "+ message.author.tag +" | "+ message.createdAt + " | "+ deletedAt +" | "+ message.content +" >>> DELETED");
 	}
 });
 
