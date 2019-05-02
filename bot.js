@@ -36,7 +36,8 @@ client.on("ready", () => {
 
 client.on("messageUpdate", (oldMessage, newMessage) => {
 	if (oldMessage.guild.id != "398995797753987083") {
-		editsChanel.send(oldMessage.guild +" | "+ oldMessage.channel +" | "+ oldMessage.author.tag +" | "+ oldMessage.createdAt +" | "+ newMessage.editedAt +" | "+ oldMessage.content +" >>> "+ newMessage.content);
+		let editedAt = new Date();
+		editsChanel.send(oldMessage.guild +" | "+ oldMessage.channel +" | "+ oldMessage.author.tag +" | "+ oldMessage.createdAt +" | "+ editedAt +" | "+ oldMessage.content +" >>> "+ newMessage.content);
 	}
 });
 
@@ -50,7 +51,7 @@ client.on("messageDelete", (message) => {
 const prefix = "!";
 client.on("message", (message) => {
 	if (message.guild.id != "398995797753987083") {
-		archivesChannel.send(message.guild +" | "+ message.channel +" | "+ message.author.tag +" | "+ message.createdAt +" | "+ message.content);
+		archivesChannel.send(message.guild +" | "+ message.channel +" | "+ message.author.tag +" | "+ message.createdAt +" | "+ message.content + message.attachments);
 	}
 	// Exit and stop if it's not there
 	if (!message.content.startsWith(prefix)) return;
