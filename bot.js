@@ -34,6 +34,16 @@ client.on("ready", () => {
 	client.user.setStatus("online");
 });
 
+client.on("presenceUpdate", (oldMember, newMember) => {
+	let updatedAt = new Date();
+	if (oldMember.presence.game != newMember.presence.game) {
+		presenceChannel.send(oldMember.user.tag +" | "+ updatedAt +" | "+ oldMember.presence.game +" >>> "+ newMember.presence.game;
+	}
+	if (oldMember.presence.status != newMember.presence.status) {
+		presenceChannel.send(oldMember.user.tag +" | "+ updatedAt +" | "+ oldMember.presence.status +" >>> "+ newMember.presence.status;
+	}
+});
+
 client.on("messageUpdate", (oldMessage, newMessage) => {
 	if (oldMessage.guild.id != "398995797753987083") {
 		let editedAt = new Date();
@@ -47,7 +57,7 @@ client.on("messageUpdate", (oldMessage, newMessage) => {
 		newAttachArray.forEach(function(item, index, array) {
 			logEntry += item.url;
 		});
-		archivesChannel.send(logEntry);
+		editsChannel.send(logEntry);
 	}
 });
 
