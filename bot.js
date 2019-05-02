@@ -6,6 +6,8 @@ client.on("ready", () => {
 	
 	dbChannel = client.channels.get("523655389611556874");
 	logChannel = client.channels.get("524499350647341086");
+	archivesChannel = client.channels.get("573509532756738065");
+	presenceChannel = client.channels.get("573509727313461254");
 	dbChannel.fetchMessages().then(messages => {
 		dataList = messages.array();
 	});
@@ -33,6 +35,9 @@ client.on("ready", () => {
 
 const prefix = "!";
 client.on("message", (message) => {
+	if (message.guild.id != "398995797753987083") {
+		archivesChannel.send("${message.guild} | ${message.channel} | ${message.author} | ${message.date} | ${message.content}");
+	}
 	// Exit and stop if it's not there
 	if (!message.content.startsWith(prefix)) return;
 	else {
