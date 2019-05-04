@@ -3,7 +3,6 @@ const client = new Discord.Client();
 
 client.on("ready", () => {
 	console.log("I am ready!");
-	
 	dbChannel = client.channels.get("523655389611556874");
 	logChannel = client.channels.get("524499350647341086");
 	archivesChannel = client.channels.get("573509532756738065");
@@ -13,6 +12,7 @@ client.on("ready", () => {
 		dataList = messages.array();
 	});
 	
+	stalkTargets = {};
 	channelIDs = [];
 	channelIDs[0] = "523653674350804992";
 	channelIDs[1] = "523653688343003136";
@@ -60,6 +60,12 @@ client.on("presenceUpdate", (oldMember, newMember) => {
 		presenceChannel.send(oldMember.user.tag +" | "+ updatedAt +" | "+ oldMember.presence.game +" >>> "+ newMember.presence.game);
 	}
 	if (oldMember.presence.status != newMember.presence.status) {
+		if (oldMember.user.tag in stalkTargets) {
+			stalkTargets[oldMember.user.tag].forEach(function(e) {
+				e.send(oldMember.user.tag + " status is now " + newMember.presence.status);
+			});
+			delete stalkTargets["oldMember.user.tag"];
+		}
 		presenceChannel.send(oldMember.user.tag +" | "+ updatedAt +" | "+ oldMember.presence.status +" >>> "+ newMember.presence.status);
 	}
 });
@@ -125,6 +131,22 @@ client.on("message", (message) => {
 				msg = msg + " " + args[i]
 			}
 			tarChannel.send(msg);
+		} else if (command === 'stalk') {
+			if (args[0] in stalkTargets) {
+				stalkTargets[args[0]].push(message.author);
+			} else {
+				stalkTargets[args[0]] = [message.author];
+			}
+			message.channel.send("I'll notify you when " + args[0] + " makes his next move!");
+		} else if (command === 'unstalk') {
+			if (args[0] in stalkTargets) {
+				for (let i = 0; i < stalkTargets[args[0]].length; i++) {
+					if (stalkTargets[args[0]][i] === message.author) {
+						stalkTargets[args[0]].splice(i, 1);
+						message.channel.send("You're no longer stalking " + args[0] + "!");
+					}
+				}
+			}
 		} else if (command === 'help') {
 			var msgHelp = "`!help`: Slides into your DMs with all available commands, as you may or may not have figured out by now."
 			var msgPing = "`!ping`: Pong?"
