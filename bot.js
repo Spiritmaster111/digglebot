@@ -64,7 +64,7 @@ client.on("presenceUpdate", (oldMember, newMember) => {
 			stalkTargets[oldMember.user.tag].forEach(function(e) {
 				e.send(oldMember.user.tag + " status is now " + newMember.presence.status);
 			});
-			delete stalkTargets["oldMember.user.tag"];
+			delete stalkTargets[oldMember.user.tag];
 		}
 		presenceChannel.send(oldMember.user.tag +" | "+ updatedAt +" | "+ oldMember.presence.status +" >>> "+ newMember.presence.status);
 	}
