@@ -88,7 +88,7 @@ client.on("messageUpdate", (oldMessage, newMessage) => {
 });
 
 client.on("messageDelete", (message) => {
-	if (message.guild.id != "398995797753987083") {
+	if (message.guild && message.guild.id != "398995797753987083") {
 		let deletedAt = new Date();
 		let logEntry = message.guild +" | "+ message.channel +" | "+ message.author.tag +" | "+ message.createdAt + " | "+ deletedAt +" | "+ message.content;
 		let attachArray = message.attachments.array();
@@ -102,7 +102,7 @@ client.on("messageDelete", (message) => {
 
 const prefix = "!";
 client.on("message", (message) => {
-	if (message.guild.id != "398995797753987083") {
+	if (message.guild && message.guild.id != "398995797753987083") {
 		let logEntry = message.guild +" | "+ message.channel +" | "+ message.author.tag +" | "+ message.createdAt +" | "+ message.content;
 		let attachArray = message.attachments.array();
 		attachArray.forEach(function(item, index, array) {
