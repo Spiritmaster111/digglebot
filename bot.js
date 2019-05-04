@@ -62,7 +62,7 @@ client.on("presenceUpdate", (oldMember, newMember) => {
 	if (oldMember.presence.status != newMember.presence.status) {
 		if (oldMember.user.tag in stalkTargets) {
 			stalkTargets[oldMember.user.tag].forEach(function(e) {
-				e.send(oldMember.user.tag + " status is now " + newMember.presence.status);
+				e.send(oldMember.user.tag + " is now " + newMember.presence.status);
 			});
 			delete stalkTargets[oldMember.user.tag];
 		}
