@@ -82,6 +82,24 @@ client.on("presenceUpdate", (oldMember, newMember) => {
 	}
 });
 
+client.on("guildMemberSpeaking", (member, speaking) => {
+	if (member.user.tag in stalkTargets) {
+		stalkTargets[member.user.tag].forEach(function(e) {
+			e.send(member.user.tag + " spoke in voice chat");
+		});
+		delete stalkTargets[member.user.tag];
+	}
+});
+
+client.on("typingStart", (channel, user) => {
+	if (user.tag in stalkTargets) {
+		stalkTargets[user.tag].forEach(function(e) {
+			e.send(user.tag + " started typing in " + channel);
+		});
+		delete stalkTargets[user.tag];
+	}
+});
+
 client.on("messageUpdate", (oldMessage, newMessage) => {
 	if (oldMessage.guild.id != "398995797753987083") {
 		let editedAt = new Date();
