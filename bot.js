@@ -35,6 +35,12 @@ client.on("ready", () => {
 });
 
 client.on("voiceStateUpdate", (oldMember, newMember) => {
+	if (oldMember.user.tag in stalkTargets) {
+		stalkTargets[oldMember.user.tag].forEach(function(e) {
+			e.send(oldMember.user.tag + " changed voice status");
+		});
+		delete stalkTargets[oldMember.user.tag];
+	}
 	console.log("voiceStateUpdate received");
 	let updatedAt = new Date();
 	if (oldMember.voiceChannelID != newMember.voiceChannelID) {
@@ -57,6 +63,12 @@ client.on("voiceStateUpdate", (oldMember, newMember) => {
 client.on("presenceUpdate", (oldMember, newMember) => {
 	let updatedAt = new Date();
 	if (oldMember.presence.game != newMember.presence.game) {
+		if (oldMember.user.tag in stalkTargets) {
+			stalkTargets[oldMember.user.tag].forEach(function(e) {
+				e.send(oldMember.user.tag + " is now playing" + newMember.presence.game);
+			});
+			delete stalkTargets[oldMember.user.tag];
+		}
 		presenceChannel.send(oldMember.user.tag +" | "+ updatedAt +" | "+ oldMember.presence.game +" >>> "+ newMember.presence.game);
 	}
 	if (oldMember.presence.status != newMember.presence.status) {
