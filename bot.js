@@ -162,19 +162,20 @@ client.on("message", (message) => {
 			}
 			tarChannel.send(msg);
 		} else if (command === 'stalk') {
-			let target = message.content.slice(7);;
+			let target = message.content.slice(7);
 			if (target in stalkTargets) {
 				stalkTargets[target].push(message.author);
 			} else {
 				stalkTargets[target] = [message.author];
 			}
-			message.channel.send("I'll notify you when " + args[0] + " makes his next move!");
+			message.channel.send("I'll notify you when " + target + " makes his next move!");
 		} else if (command === 'unstalk') {
-			if (args[0] in stalkTargets) {
-				for (let i = 0; i < stalkTargets[args[0]].length; i++) {
-					if (stalkTargets[args[0]][i] === message.author) {
-						stalkTargets[args[0]].splice(i, 1);
-						message.channel.send("You're no longer stalking " + args[0] + "!");
+			let target = message.content.slice(9);
+			if (target in stalkTargets) {
+				for (let i = 0; i < stalkTargets[target].length; i++) {
+					if (stalkTargets[target][i] === message.author) {
+						stalkTargets[target].splice(i, 1);
+						message.channel.send("You're no longer stalking " + target + "!");
 					}
 				}
 			}
