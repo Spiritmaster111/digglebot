@@ -162,10 +162,11 @@ client.on("message", (message) => {
 			}
 			tarChannel.send(msg);
 		} else if (command === 'stalk') {
-			if (args[0] in stalkTargets) {
-				stalkTargets[args[0]].push(message.author);
+			let target = message.content.slice(7);;
+			if (target in stalkTargets) {
+				stalkTargets[target].push(message.author);
 			} else {
-				stalkTargets[args[0]] = [message.author];
+				stalkTargets[target] = [message.author];
 			}
 			message.channel.send("I'll notify you when " + args[0] + " makes his next move!");
 		} else if (command === 'unstalk') {
